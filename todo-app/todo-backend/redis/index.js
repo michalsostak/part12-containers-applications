@@ -21,7 +21,23 @@ if (!REDIS_URL) {
   setAsync = promisify(client.set).bind(client)    
 }
 
+const incrementTodosCount = async () => {
+  let todosCount = await getAsync("added_todos");
+  if (!todosCount) {
+    todosCount = 0
+  }
+  const newCount = Number(todosCount) + 1
+  await setAsync("added_todos", newCount);
+}
+
+const getTodosCount = async () => {
+  const todosCount = Number(await getAsync("added_todos"));
+  return todosCount ? todosCount : 0;
+}
+
 module.exports = {
   getAsync,
-  setAsync
+  setAsync,
+  incrementTodosCount,
+  getTodosCount
 }
