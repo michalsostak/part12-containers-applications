@@ -10,8 +10,6 @@ services:
     volumes:
       - ./todo-frontend:/usr/src/app
     container_name: todo-front
-    # ports:
-    #   - 5001:3000
 
   # back-end
   # no ports here!
